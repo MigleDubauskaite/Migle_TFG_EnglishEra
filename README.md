@@ -155,7 +155,7 @@ Desarrollada con React Native + Expo · Probada en **Android** (emulador y dispo
 
 ### 📥 Descargar APK
 
-> **[⬇️ Descargar APK](https://expo.dev/artifacts/eas/0eg2Q3cMsmioVG7sx9LkXTbTizPFtEPJpDc32Lbu1oY.apk)**
+> **[⬇️ Descargar APK](https://expo.dev/artifacts/eas/PqrAV__GkFe6UWrZyhXBBQLNrB3cNvKiPckthIzjMmY.apk)**
 
 ### 🔨 Generar APK tú mismo
 
