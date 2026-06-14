@@ -1,0 +1,47 @@
+<svg width="100%" viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>English Era — Real English, every day</title>
+  <desc>Banner animado para English Era, plataforma de aprendizaje de inglés</desc>
+
+  <rect width="680" height="200" fill="#1B3A5C" rx="12"/>
+
+  <!-- Círculos decorativos fondo (como en la web) -->
+  <circle cx="580" cy="40" r="90" fill="#243f63" opacity="0.8"/>
+  <circle cx="620" cy="180" r="60" fill="#1f3757" opacity="0.6"/>
+  <circle cx="60" cy="170" r="70" fill="#243f63" opacity="0.5"/>
+
+  <!-- Línea separadora inferior (como en la web) -->
+  <line x1="40" y1="148" x2="640" y2="148" stroke="#2a4a6e" stroke-width="1"/>
+
+  <!-- Etiqueta superior -->
+  <text x="48" y="52" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#ACC8E6" letter-spacing="3">
+    ENGLISH LEARNING PLATFORM
+  </text>
+
+  <!-- Título principal -->
+  <text x="48" y="95" font-family="Arial, sans-serif" font-size="38" font-weight="800" fill="#FFFFFF">
+    Real English,
+    <animate attributeName="opacity" values="0;1" dur="1s" fill="freeze"/>
+  </text>
+  <text x="48" y="138" font-family="Arial, sans-serif" font-size="38" font-weight="800" fill="#ACC8E6">
+    every day.
+    <animate attributeName="opacity" values="0;1" dur="1.4s" fill="freeze"/>
+  </text>
+
+  <!-- Stats (como la web) -->
+  <text x="48" y="174" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#FFE97D">480</text>
+  <text x="48" y="188" font-family="Arial, sans-serif" font-size="9" font-weight="600" fill="#ACC8E6" letter-spacing="1.5">QUESTIONS</text>
+
+  <text x="145" y="174" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#FFE97D">6</text>
+  <text x="145" y="188" font-family="Arial, sans-serif" font-size="9" font-weight="600" fill="#ACC8E6" letter-spacing="1.5">CEFR LEVELS</text>
+
+  <text x="242" y="174" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#FFE97D">3</text>
+  <text x="242" y="188" font-family="Arial, sans-serif" font-size="9" font-weight="600" fill="#ACC8E6" letter-spacing="1.5">PLATFORMS</text>
+
+  <!-- Badge TFG -->
+  <rect x="490" y="158" width="148" height="28" rx="14" fill="#FF8383" opacity="0.15"/>
+  <rect x="490" y="158" width="148" height="28" rx="14" fill="none" stroke="#FF8383" stroke-width="1"/>
+  <text x="564" y="177" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#FF8383" text-anchor="middle">TFG · DAM · 2026</text>
+
+  <!-- Animación fade-in general -->
+  <animate attributeName="opacity" values="0;1" dur="0.6s" fill="freeze"/>
+</svg>
