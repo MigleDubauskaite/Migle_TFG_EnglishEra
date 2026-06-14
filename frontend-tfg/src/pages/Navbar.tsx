@@ -8,7 +8,7 @@ interface NavbarProps {
 
 function readStoredName(): string {
   try {
-    const raw = localStorage.getItem('loggedUser');
+    const raw = localStorage.getItem('loggedUser') || sessionStorage.getItem('loggedUser');
     if (!raw) return '';
     const o = JSON.parse(raw) as { username?: string };
     return o.username?.trim() || '';

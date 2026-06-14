@@ -30,7 +30,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 function isAdmin(): boolean {
   try {
-    const raw = localStorage.getItem('loggedUser');
+    const raw = localStorage.getItem('loggedUser') || sessionStorage.getItem('loggedUser');
     if (!raw) return false;
     const o = JSON.parse(raw) as { role?: string };
     return o.role === 'ADMIN';

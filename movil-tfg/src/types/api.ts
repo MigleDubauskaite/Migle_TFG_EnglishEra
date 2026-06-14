@@ -44,6 +44,7 @@ export interface AppEvent {
   online: boolean;
   eventDate: string | null;
   createdBy: string;
+  registrationUrl?: string;
 }
 
 export interface BlogPost {

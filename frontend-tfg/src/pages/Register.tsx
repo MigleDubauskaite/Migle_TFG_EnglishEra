@@ -45,7 +45,7 @@ const Register = ({ onRegistered }: RegisterProps) => {
       );
       setSession(
         data.token,
-        JSON.stringify({ id: data.id, username: data.username, email: data.email, currentLevel: data.currentLevel, totalXP: data.totalXP }),
+        JSON.stringify({ id: data.id, username: data.username, email: data.email, currentLevel: data.currentLevel, totalXp: data.totalXP, role: data.role }),
         false
       );
       localStorage.removeItem('quizHistory');

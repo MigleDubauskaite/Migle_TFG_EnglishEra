@@ -165,10 +165,10 @@ function EventCard({
             </View>
           )}
 
-          {(ev as any).registrationUrl ? (
+          {ev.registrationUrl ? (
             <Pressable
               style={s.registerBtn}
-              onPress={() => Linking.openURL((ev as any).registrationUrl)}
+              onPress={() => Linking.openURL(ev.registrationUrl!)}
             >
               <Text style={s.registerBtnTxt}>Register / More info →</Text>
             </Pressable>

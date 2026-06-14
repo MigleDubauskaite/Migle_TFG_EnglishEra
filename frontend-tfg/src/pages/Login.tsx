@@ -42,7 +42,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
       );
       setSession(
         data.token,
-        JSON.stringify({ id: data.id, username: data.username, email: data.email, currentLevel: data.currentLevel, totalXP: data.totalXP, role: data.role }),
+        JSON.stringify({ id: data.id, username: data.username, email: data.email, currentLevel: data.currentLevel, totalXp: data.totalXP, role: data.role }),
         rememberMe
       );
       onLoginSuccess();

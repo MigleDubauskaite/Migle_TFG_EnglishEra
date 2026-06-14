@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (email) await loadHistory(email);
       }
       setIsLoading(false);
-    });
+    }).catch(() => setIsLoading(false));
   }, []);
 
   const signIn = async (newToken: string) => {

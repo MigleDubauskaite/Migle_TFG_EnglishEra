@@ -107,7 +107,9 @@ export default function QuizScreen() {
           const q = questions[i];
           if (!q) return item;
           const di = answers[q.id] ?? -1;
-          return { ...item, options: q.displayOptions, selectedIndex: di, correctIndex: q.displayToOriginal.indexOf(item.correctIndex) };
+          const correctIdx = q.displayToOriginal.indexOf(item.correctIndex);
+          if (correctIdx === -1) return item;
+          return { ...item, options: q.displayOptions, selectedIndex: di, correctIndex: correctIdx };
         });
         enriched = { ...res, review: enrichedReview };
       } catch {
