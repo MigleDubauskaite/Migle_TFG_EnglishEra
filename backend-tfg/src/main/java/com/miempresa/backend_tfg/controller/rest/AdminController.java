@@ -209,6 +209,23 @@ public class AdminController {
                         q.getPrompt(), q.getOptA(), q.getOptB(), q.getOptC(), q.getOptD(), q.getCorrectIndex()));
     }
 
+    @PatchMapping("/quizzes/{id}")
+    public ResponseEntity<AdminQuizDto> updateQuiz(@PathVariable Long id, @RequestBody AdminCreateQuizRequest req) {
+        Quiz q = quizRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Question not found."));
+        q.setLevel(Level.valueOf(req.level().toUpperCase()));
+        q.setQuestionType(QuizQuestionType.valueOf(req.questionType().toUpperCase()));
+        q.setPrompt(req.prompt().trim());
+        q.setOptA(req.optA().trim());
+        q.setOptB(req.optB().trim());
+        q.setOptC(req.optC().trim());
+        q.setOptD(req.optD().trim());
+        q.setCorrectIndex(req.correctIndex());
+        q = quizRepository.save(q);
+        return ResponseEntity.ok(new AdminQuizDto(q.getId(), q.getLevel().name(), q.getQuestionType().name(),
+                q.getPrompt(), q.getOptA(), q.getOptB(), q.getOptC(), q.getOptD(), q.getCorrectIndex()));
+    }
+
     @DeleteMapping("/quizzes/{id}")
     public ResponseEntity<Map<String, String>> deleteQuiz(@PathVariable Long id) {
         if (!quizRepository.existsById(id)) {

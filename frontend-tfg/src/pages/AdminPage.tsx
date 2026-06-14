@@ -92,6 +92,12 @@ const AdminPage = () => {
   const [quizErr, setQuizErr] = useState('');
   const [quizLoading, setQuizLoading] = useState(false);
 
+  // Edit quiz
+  const [editQuiz, setEditQuiz] = useState<AdminQuiz | null>(null);
+  const [editQuizForm, setEditQuizForm] = useState({ level: 'A1', questionType: 'GRAMMAR', prompt: '', optA: '', optB: '', optC: '', optD: '', correctIndex: 0 });
+  const [editQuizErr, setEditQuizErr] = useState('');
+  const [editQuizLoading, setEditQuizLoading] = useState(false);
+
   // Initial load
   useEffect(() => {
     Promise.all([
@@ -151,6 +157,24 @@ const AdminPage = () => {
     await apiDelete('/api/admin/quizzes/' + id);
     setQuizzes(q => q.filter(x => x.id !== id));
     setStats(s => s ? { ...s, totalQuizzes: s.totalQuizzes - 1 } : s);
+  };
+
+  const openEditQuiz = (q: AdminQuiz) => {
+    setEditQuiz(q);
+    setEditQuizForm({ level: q.level, questionType: q.questionType, prompt: q.prompt, optA: q.optA, optB: q.optB, optC: q.optC, optD: q.optD, correctIndex: q.correctIndex });
+    setEditQuizErr('');
+  };
+
+  const submitEditQuiz = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editQuiz) return;
+    setEditQuizErr(''); setEditQuizLoading(true);
+    try {
+      const updated = await apiPatch<AdminQuiz>(`/api/admin/quizzes/${editQuiz.id}`, editQuizForm);
+      setQuizzes(prev => prev.map(q => q.id === updated.id ? updated : q));
+      setEditQuiz(null);
+    } catch (e: any) { setEditQuizErr(e.message); }
+    finally { setEditQuizLoading(false); }
   };
 
   const submitAddUser = async (e: React.FormEvent) => {
@@ -376,7 +400,13 @@ const AdminPage = () => {
                         <span className="rounded-full px-2 py-0.5 text-xs font-bold bg-stone-100 text-stone-500">{q.questionType}</span>
                       </div>
                       <p className="flex-1 text-sm text-stone-800 font-medium leading-snug">{q.prompt}</p>
-                      <DeleteBtn onClick={() => deleteQuiz(q.id)} />
+                      <div className="flex gap-1 shrink-0">
+                        <button
+                          onClick={() => openEditQuiz(q)}
+                          className="text-navy/60 hover:text-navy text-xs font-bold px-2 py-1 rounded-lg hover:bg-navy/10 transition-colors"
+                        >Edit</button>
+                        <DeleteBtn onClick={() => deleteQuiz(q.id)} />
+                      </div>
                     </div>
                     <div className="grid grid-cols-2 gap-1.5 mt-3 pl-1">
                       {[q.optA, q.optB, q.optC, q.optD].map((opt, i) => (
@@ -473,6 +503,52 @@ const AdminPage = () => {
               className="w-full bg-navy text-white font-bold py-2.5 rounded-xl hover:bg-navy/85 disabled:opacity-50 transition-colors mt-1"
             >
               {editLoading ? 'Saving…' : 'Save changes'}
+            </button>
+          </form>
+        </Modal>
+      )}
+
+      {/* ── Modal: Edit question ── */}
+      {editQuiz && (
+        <Modal title="Edit question" onClose={() => { setEditQuiz(null); setEditQuizErr(''); }}>
+          <form onSubmit={submitEditQuiz} className="space-y-3">
+            {editQuizErr && <p className="text-coral text-sm font-semibold">{editQuizErr}</p>}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Level">
+                <select className={selectCls} value={editQuizForm.level} onChange={e => setEditQuizForm(p => ({ ...p, level: e.target.value }))}>
+                  {LEVELS.map(l => <option key={l}>{l}</option>)}
+                </select>
+              </Field>
+              <Field label="Type">
+                <select className={selectCls} value={editQuizForm.questionType} onChange={e => setEditQuizForm(p => ({ ...p, questionType: e.target.value }))}>
+                  {QTYPES.map(t => <option key={t}>{t}</option>)}
+                </select>
+              </Field>
+            </div>
+            <Field label="Question">
+              <textarea className={`${inputCls} resize-none`} rows={2} required value={editQuizForm.prompt} onChange={e => setEditQuizForm(p => ({ ...p, prompt: e.target.value }))} />
+            </Field>
+            {(['A', 'B', 'C', 'D'] as const).map((letter, i) => {
+              const key = `opt${letter}` as 'optA' | 'optB' | 'optC' | 'optD';
+              return (
+                <Field key={letter} label={`Option ${letter}${editQuizForm.correctIndex === i ? ' ✓ correct' : ''}`}>
+                  <div className="flex gap-2">
+                    <input className={`${inputCls} flex-1`} required value={editQuizForm[key]} onChange={e => setEditQuizForm(p => ({ ...p, [key]: e.target.value }))} />
+                    <button
+                      type="button"
+                      onClick={() => setEditQuizForm(p => ({ ...p, correctIndex: i }))}
+                      className={`px-3 rounded-xl text-xs font-bold border-2 transition-colors ${editQuizForm.correctIndex === i ? 'border-green-400 bg-green-50 text-green-700' : 'border-stone-200 text-stone-400 hover:border-stone-300'}`}
+                    >✓</button>
+                  </div>
+                </Field>
+              );
+            })}
+            <button
+              type="submit"
+              disabled={editQuizLoading}
+              className="w-full bg-navy text-white font-bold py-2.5 rounded-xl hover:bg-navy/85 disabled:opacity-50 transition-colors"
+            >
+              {editQuizLoading ? 'Saving…' : 'Save changes'}
             </button>
           </form>
         </Modal>
