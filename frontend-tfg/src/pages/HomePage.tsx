@@ -19,8 +19,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 const LEVEL_THRESHOLDS: Record<string, [number, number, string]> = {
-  A1: [0, 100, 'A2'], A2: [100, 250, 'B1'], B1: [250, 500, 'B2'],
-  B2: [500, 800, 'C1'], C1: [800, 1200, 'C2'],
+  A1: [0, 500, 'A2'], A2: [500, 1500, 'B1'], B1: [1500, 3000, 'B2'],
+  B2: [3000, 5000, 'C1'], C1: [5000, 8000, 'C2'],
 };
 
 const HomePage = () => {

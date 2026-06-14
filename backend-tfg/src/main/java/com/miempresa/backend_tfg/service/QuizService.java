@@ -97,9 +97,11 @@ public class QuizService {
             }
         }
 
-        int xpEarned = correct * XP_PER_CORRECT;
+        Level userLevel = user.getCurrentLevel() != null ? user.getCurrentLevel() : Level.A1;
+        int xpEarned = (level.ordinal() >= userLevel.ordinal()) ? correct * XP_PER_CORRECT : 0;
         int newTotal = (user.getTotalXp() == null ? 0 : user.getTotalXp()) + xpEarned;
-        Level newLevel = computeLevel(newTotal);
+        Level xpLevel = computeLevel(newTotal);
+        Level newLevel = xpLevel.ordinal() >= userLevel.ordinal() ? xpLevel : userLevel;
         user.setTotalXp(newTotal);
         user.setCurrentLevel(newLevel);
         userRepository.save(user);

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -10,7 +10,7 @@ import {
 import { apiGet, apiPost } from '../api/client';
 import { addToHistory } from '../store/historyStore';
 import { Colors } from '../theme/colors';
-import type { QuizPublic, QuizResult } from '../types/api';
+import type { QuizPublic, QuizResult, UserProfile } from '../types/api';
 
 const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 const COUNT_OPTIONS = [5, 10, 15];
@@ -50,6 +50,12 @@ type Screen = 'selector' | 'quiz' | 'result';
 export default function QuizScreen() {
   const [screen, setScreen] = useState<Screen>('selector');
   const [level, setLevel] = useState('A1');
+
+  useEffect(() => {
+    apiGet<UserProfile>('/api/users/me').then(p => {
+      if (p.currentLevel) setLevel(p.currentLevel);
+    }).catch(() => {});
+  }, []);
   const [count, setCount] = useState(5);
   const [selectedType, setSelectedType] = useState<QuizTypeKey | null>(null);
   const [questions, setQuestions] = useState<ShuffledQ[]>([]);

@@ -19,12 +19,12 @@ function loadHistory(): HistoryEntry[] {
 }
 
 const XP_THRESHOLDS: Record<string, { min: number; max: number; label: string }> = {
-  A1: { min: 0,    max: 100,  label: 'Beginner' },
-  A2: { min: 100,  max: 250,  label: 'Elementary' },
-  B1: { min: 250,  max: 500,  label: 'Intermediate' },
-  B2: { min: 500,  max: 800,  label: 'Upper-Int.' },
-  C1: { min: 800,  max: 1200, label: 'Advanced' },
-  C2: { min: 1200, max: 1200, label: 'Mastery' },
+  A1: { min: 0,    max: 500,  label: 'Beginner' },
+  A2: { min: 500,  max: 1500, label: 'Elementary' },
+  B1: { min: 1500, max: 3000, label: 'Intermediate' },
+  B2: { min: 3000, max: 5000, label: 'Upper-Int.' },
+  C1: { min: 5000, max: 8000, label: 'Advanced' },
+  C2: { min: 8000, max: 8000, label: 'Mastery' },
 };
 
 const LEVEL_STYLE: Record<string, { bg: string; text: string; bar: string; accent: string }> = {
