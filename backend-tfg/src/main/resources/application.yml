@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: quiz-app
+
+
+  # --- MySQL ---
+  datasource:
+    url: jdbc:mysql://localhost:3306/tfg_english_db?createDatabaseIfNotExist=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: root123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update 
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  # --- MongoDB ---
+  data:
+    mongodb:
+      # directConnection=true avoids replica-set negotiation that causes
+      # "socket out of stream" when connecting to a standalone Docker container.
+      uri: mongodb://localhost:27017/educational_db?directConnection=true&connectTimeoutMS=5000&serverSelectionTimeoutMS=5000&socketTimeoutMS=10000
+      auto-index-creation: true
+
+# --- Servidor ---
+server:
+  port: 8080
+
+# App config
+app:
+  jwt:
+    secret: "dev-secret-key-please-use-at-least-32-characters-long!!"
+    expiration-ms: 604800000
+
+  # Extra CORS origins (comma-separated). Override with ALLOWED_ORIGINS env var in production.
+  # Example: https://englishera.netlify.app,https://englishera-api.onrender.com
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS:}
+
+  # https://newsapi.org/ — free developer key for live English headlines
+  newsapi:
+    api-key: ${NEWSAPI_KEY:8a3f7d00d89340a199a4b96238d8853e}
+
+groq:
+  api-key: ${GROQ_API_KEY:}

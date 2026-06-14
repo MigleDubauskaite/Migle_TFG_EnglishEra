@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources — English Era</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B2A4A;
+      --mint:   #3ECFB2;
+      --apricot:#F4845F;
+      --steel:  #4A7FA5;
+      --cream:  #FFF8EE;
+      --sun:    #F5C842;
+      --stone0: #F9F7F4;
+      --stone1: #EFEDE8;
+      --stone2: #D6D3CB;
+      --stone5: #7A7670;
+      --stone9: #1C1A17;
+      --white:  #FFFFFF;
+      --radius: 14px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--stone0);
+      color: var(--stone9);
+      padding: 0 16px 60px;
+    }
+
+    /* ── Header ── */
+    header {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 0 32px;
+    }
+    header .eyebrow {
+      font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+      color: var(--navy); opacity: .5; text-transform: uppercase; margin-bottom: 8px;
+    }
+    header h1 { font-size: 34px; font-weight: 900; color: var(--stone9); }
+    header p  { font-size: 14px; color: var(--stone5); margin-top: 8px; line-height: 1.6; }
+    header a.home-link {
+      display: inline-block; margin-top: 14px;
+      font-size: 12px; font-weight: 700; color: var(--steel);
+      text-decoration: none;
+    }
+    header a.home-link:hover { text-decoration: underline; }
+
+    /* ── Sections ── */
+    .page { max-width: 860px; margin: 0 auto; }
+
+    section { margin-bottom: 44px; }
+
+    .section-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .section-dot {
+      width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 12px; font-weight: 900; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--stone9);
+    }
+    .section-desc {
+      font-size: 12px; color: var(--stone5); margin-bottom: 14px;
+      line-height: 1.6; margin-left: 22px;
+    }
+
+    /* ── Cards grid ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+
+    /* ── Resource card ── */
+    .card {
+      background: var(--white);
+      border: 1.5px solid var(--stone1);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 8px;
+      text-decoration: none;
+      transition: box-shadow .15s, transform .15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.09); transform: translateY(-2px); }
+
+    .card-strip {
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+
+    .badge {
+      display: inline-block; border-radius: 50px;
+      padding: 2px 10px; font-size: 10px; font-weight: 800;
+      align-self: flex-start; margin-top: 4px;
+    }
+    .badge-pdf      { background: #1B2A4A22; color: var(--navy); }
+    .badge-external { background: #4A7FA522; color: var(--steel); }
+    .badge-book     { background: #F4845F22; color: var(--apricot); }
+
+    .card-title { font-size: 14px; font-weight: 800; color: var(--stone9); line-height: 1.3; }
+    .card-desc  { font-size: 12px; color: var(--stone5); line-height: 1.5; flex: 1; }
+    .card-action {
+      font-size: 11px; font-weight: 700; color: var(--steel);
+      margin-top: 4px; display: flex; align-items: center; gap: 4px;
+    }
+
+    /* ── Note footer ── */
+    .note {
+      max-width: 860px;
+      margin: 8px auto 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      font-size: 12px;
+      color: rgba(255,255,255,.6);
+      line-height: 1.6;
+    }
+    .note-icon { font-size: 15px; flex-shrink: 0; }
+
+    /* Color dots per section */
+    .dot-pronunciation { background: var(--mint); }
+    .dot-vocabulary    { background: var(--apricot); }
+    .dot-grammar       { background: var(--steel); }
+    .dot-books         { background: #8B6CF6; }
+    .dot-videos        { background: #E53935; }
+    .dot-songs         { background: #F59E0B; }
+    .dot-collections   { background: var(--sun); }
+
+    /* Strip colors */
+    .strip-pronunciation { background: var(--mint); }
+    .strip-vocabulary    { background: var(--apricot); }
+    .strip-grammar       { background: var(--steel); }
+    .strip-books         { background: #8B6CF6; }
+    .strip-videos        { background: #E53935; }
+    .strip-songs         { background: #F59E0B; }
+    .strip-collections   { background: var(--sun); }
+
+    /* ── Video embed ── */
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; }
+    .video-card {
+      background: var(--white);
+      border: 1.5px solid var(--stone1);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .video-embed {
+      position: relative; width: 100%; padding-top: 56.25%;
+    }
+    .video-embed iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+    }
+    .video-info { padding: 12px 14px 14px; }
+    .video-title { font-size: 14px; font-weight: 800; color: var(--stone9); margin-bottom: 4px; }
+    .video-desc  { font-size: 12px; color: var(--stone5); line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">English Era</p>
+  <h1>Resources</h1>
+  <p>PDFs, books and external links curated for every level — all free.</p>
+  <a class="home-link" href="/">← Back to home</a>
+</header>
+
+<div class="page">
+
+  <!-- ── Pronunciation ── -->
+  <section>
+    <div class="section-header">
+      <span class="section-dot dot-pronunciation"></span>
+      <span class="section-title">Pronunciation</span>
+    </div>
+    <p class="section-desc">Minimal pairs, sounds and audio exercises.</p>
+    <div class="grid">
+
+      <a class="card" href="/minimal-pairs-with-audio.pdf" target="_blank">
+        <span class="card-strip strip-pronunciation"></span>
+        <span class="badge badge-pdf">PDF</span>
+        <span class="card-title">Minimal Pairs with Audio Guide</span>
+        <span class="card-desc">Practice distinguishing similar English sounds with audio-referenced minimal pair exercises. Ideal for all levels.</span>
+        <span class="card-action">Open PDF →</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Vocabulary ── -->
+  <section>
+    <div class="section-header">
+      <span class="section-dot dot-vocabulary"></span>
+      <span class="section-title">Vocabulary</span>
+    </div>
+    <p class="section-desc">Word lists, business English and CEFR-aligned vocabulary.</p>
+    <div class="grid">
+
+      <a class="card" href="/essential-business-words.pdf" target="_blank">
+        <span class="card-strip strip-vocabulary"></span>
+        <span class="badge badge-pdf">PDF</span>
+        <span class="card-title">Essential Business Words</span>
+        <span class="card-desc">Key vocabulary for professional and business contexts — emails, meetings, presentations and reports.</span>
+        <span class="card-action">Open PDF →</span>
+      </a>
+
+      <a class="card" href="/84669-pet-vocabulary-list.pdf" target="_blank">
+        <span class="card-strip strip-vocabulary"></span>
+        <span class="badge badge-pdf">PDF</span>
+        <span class="card-title">Cambridge PET Vocabulary List</span>
+        <span class="card-desc">Official Cambridge B1 word list covering all topics tested in the PET / B1 Preliminary exam.</span>
+        <span class="card-action">Open PDF →</span>
+      </a>
+
+      <a class="card" href="https://help.langeek.co/cefr-english-vocabulary-pdf/" target="_blank" rel="noopener">
+        <span class="card-strip strip-vocabulary"></span>
+        <span class="badge badge-external">External</span>
+        <span class="card-title">CEFR Vocabulary PDFs — LanGeek</span>
+        <span class="card-desc">Downloadable vocabulary lists organised by CEFR level (A1 to C2) with example sentences and context.</span>
+        <span class="card-action">Visit site →</span>
+      </a>
+
+      <a class="card" href="https://www.nativos.org/en/blog/vocabulary-for-business-english/" target="_blank" rel="noopener">
+        <span class="card-strip strip-vocabulary"></span>
+        <span class="badge badge-external">External</span>
+        <span class="card-title">Vocabulary for Business English</span>
+        <span class="card-desc">Curated list of business expressions, collocations and idioms used in real professional settings.</span>
+        <span class="card-action">Visit site →</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Grammar ── -->
+  <section>
+    <div class="section-header">
+      <span class="section-dot dot-grammar"></span>
+      <span class="section-title">Grammar &amp; Structure</span>
+    </div>
+    <p class="section-desc">Reference sheets and grammar guides.</p>
+    <div class="grid">
+
+      <a class="card" href="/english-prepositions-list.pdf" target="_blank">
+        <span class="card-strip strip-grammar"></span>
+        <span class="badge badge-pdf">PDF</span>
+        <span class="card-title">English Prepositions List</span>
+        <span class="card-desc">Complete reference list of English prepositions with usage rules and example sentences.</span>
+        <span class="card-action">Open PDF →</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Books & Readers ── -->
+  <section>
+    <div class="section-header">
+      <span class="section-dot dot-books"></span>
+      <span class="section-title">Books &amp; Readers</span>
+    </div>
+    <p class="section-desc">Full course books and free public-domain literature.</p>
+    <div class="grid">
+
+      <a class="card" href="/English-for-Everyone.-Level-1-Beginner.-Course-Book.-2016-184p.-min.pdf" target="_blank">
+        <span class="card-strip strip-books"></span>
+        <span class="badge badge-book">Book · A1</span>
+        <span class="card-title">English for Everyone — Level 1 Beginner</span>
+        <span class="card-desc">DK's visual course book for complete beginners. Covers basic grammar, vocabulary and everyday conversations.</span>
+        <span class="card-action">Open PDF →</span>
+      </a>
+
+      <a class="card" href="/Complete-English-All-in-One-for-ESL-Learners-Book.pdf" target="_blank">
+        <span class="card-strip strip-books"></span>
+        <span class="badge badge-book">Book · A1–B2</span>
+        <span class="card-title">Complete English All-in-One for ESL Learners</span>
+        <span class="card-desc">Comprehensive reference covering grammar, writing, reading and speaking skills for ESL students at all levels.</span>
+        <span class="card-action">Open PDF →</span>
+      </a>
+
+      <a class="card" href="/learn-english-in-seven.pdf" target="_blank">
+        <span class="card-strip strip-books"></span>
+        <span class="badge badge-book">Book</span>
+        <span class="card-title">Learn English in Seven</span>
+        <span class="card-desc">A structured seven-step guide to mastering key English skills — practical exercises included throughout.</span>
+        <span class="card-action">Open PDF →</span>
+      </a>
+
+      <a class="card" href="https://standardebooks.org/ebooks" target="_blank" rel="noopener">
+        <span class="card-strip strip-books"></span>
+        <span class="badge badge-external">External · Free</span>
+        <span class="card-title">Standard Ebooks</span>
+        <span class="card-desc">Beautifully formatted, free and legal public-domain ebooks — classics by Austen, Dickens, Orwell and many more.</span>
+        <span class="card-action">Browse library →</span>
+      </a>
+
+      <a class="card" href="https://publicdomainlibrary.org/en/" target="_blank" rel="noopener">
+        <span class="card-strip strip-books"></span>
+        <span class="badge badge-external">External · Free</span>
+        <span class="card-title">Public Domain Library</span>
+        <span class="card-desc">Thousands of free public-domain books ready to download in PDF and EPUB — great for extensive reading practice.</span>
+        <span class="card-action">Browse library →</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Videos ── -->
+  <section>
+    <div class="section-header">
+      <span class="section-dot dot-videos"></span>
+      <span class="section-title">Videos — Learn with Movies</span>
+    </div>
+    <p class="section-desc">English lessons through film — natural dialogue and vocabulary in context.</p>
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/97fxGkWqBCc" allowfullscreen loading="lazy"
+            title="Learn English With Movies - Shrek"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Learn English With Movies — Shrek</p>
+          <p class="video-desc">Vocabulary, expressions and humour from Shrek explained for English learners. Great for B1–B2.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Songs & Lyrics ── -->
+  <section>
+    <div class="section-header">
+      <span class="section-dot dot-songs"></span>
+      <span class="section-title">Songs &amp; Lyrics</span>
+    </div>
+    <p class="section-desc">Music is one of the best tools for pronunciation and vocabulary — listen, read along and repeat.</p>
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/axS6L0NX7VE" allowfullscreen loading="lazy"
+            title="Imagine Dragons - Next To Me"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Imagine Dragons — Next To Me</p>
+          <p class="video-desc">Follow the lyrics to practise pronunciation, rhythm and natural English phrasing.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/UbrUd6VWE3Q" allowfullscreen loading="lazy"
+            title="Doja Cat - Paint The Town Red"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Doja Cat — Paint The Town Red</p>
+          <p class="video-desc">High-energy track with vivid vocabulary and idiomatic expressions.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/_PyI4jFbX38" allowfullscreen loading="lazy"
+            title="Faouzia - UNETHICAL"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Faouzia — UNETHICAL</p>
+          <p class="video-desc">Powerful vocals and expressive language — great for picking up emotional and descriptive vocabulary.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PDF Collections ── -->
+  <section>
+    <div class="section-header">
+      <span class="section-dot dot-collections"></span>
+      <span class="section-title">PDF Collections</span>
+    </div>
+    <p class="section-desc">Curated PDF libraries from trusted English learning platforms.</p>
+    <div class="grid">
+
+      <a class="card" href="https://www.englishclass101.com/learn-with-pdf" target="_blank" rel="noopener">
+        <span class="card-strip strip-collections"></span>
+        <span class="badge badge-external">External</span>
+        <span class="card-title">EnglishClass101 — Learn with PDF</span>
+        <span class="card-desc">Free downloadable PDF lessons covering grammar, vocabulary, phrases and cultural notes for all levels.</span>
+        <span class="card-action">Visit site →</span>
+      </a>
+
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+<div class="note">
+  <span class="note-icon">ℹ</span>
+  PDFs open directly in your browser. External links open in a new tab — all resources are free to use.
+</div>
+
+</body>
+</html>

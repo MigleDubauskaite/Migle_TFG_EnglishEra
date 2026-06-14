@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --color-coral: #ff8383;
+  --color-apricot: #F48F68;   /* warm orange */
+  --color-cream: #FFF6DE;     /* warm cream */
+  --color-sun: #FFE97D;       /* vivid yellow */
+  --color-ivory: #fefddf;
+  --color-sage: #E5EEE4;      /* soft sage green */
+  --color-steel: #ACC8E6;
+  --color-navy: #1b3a5c;
+  --color-mint: #6FCF97;      /* success green */
+  --color-teal: #DFF1F1;      /* light teal */
+  --color-peach: #FFB399;     /* soft peach */
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33%       { transform: translateY(-18px) translateX(10px); }
+  66%       { transform: translateY(8px) translateX(-8px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33%       { transform: translateY(14px) translateX(-12px); }
+  66%       { transform: translateY(-10px) translateX(6px); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%       { transform: translateY(-12px) translateX(14px); }
+}
+
+.float-1 { animation: float1 5s ease-in-out infinite; }
+.float-2 { animation: float2 7s ease-in-out infinite; }
+.float-3 { animation: float3 4s ease-in-out infinite; }
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  background: linear-gradient(160deg, #FFF6DE 0%, #FFF0C8 50%, #FFF6DE 100%);
+  min-height: 100vh;
+  background-color: #FFF6DE;
+}

@@ -1,0 +1,134 @@
+# ================================
+# SPRING BOOT / JAVA (backend-tfg)
+# ================================
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+.mvn/wrapper/maven-wrapper.properties
+mvnw
+mvnw.cmd
+
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+*.log
+logs/
+
+spring-shell.log
+
+.sts4-cache/
+.apt_generated/
+.apt_generated_test/
+
+application-local.properties
+application-local.yml
+application-secrets.yml
+
+# ================================
+# REACT + TYPESCRIPT (frontend-tfg)
+# ================================
+node_modules/
+dist/
+build/
+.next/
+out/
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+.npmrc
+.yarnrc
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+coverage/
+.nyc_output/
+
+# ================================
+# REACT NATIVE + EXPO (movil-tfg)
+# ================================
+.expo/
+.expo-shared/
+expo-env.d.ts
+web-build/
+
+*.keystore
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+android/
+ios/
+
+# ================================
+# DOCKER
+# ================================
+docker-compose.override.yml
+
+# ================================
+# IDEs y editores
+# ================================
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ================================
+# macOS
+# ================================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ================================
+# Windows
+# ================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ================================
+# Python (scripts auxiliares)
+# ================================
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ================================
+# BASE DE DATOS / DOCKER VOLUMES
+# ================================
+mysql_data/
+mongo_data/
+*.sql.backup

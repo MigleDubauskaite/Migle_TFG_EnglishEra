@@ -1,0 +1,81 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql_tfg
+    restart: no
+    environment:
+      MYSQL_DATABASE: tfg_english_db
+      MYSQL_ROOT_PASSWORD: root123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongo-db:
+    image: mongo:7
+    container_name: mongo_tfg
+    restart: no
+    environment:
+      MONGO_INITDB_DATABASE: educational_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: backend_tfg
+    restart: no
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/tfg_english_db?createDatabaseIfNotExist=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+      SPRING_DATA_MONGODB_URI: mongodb://mongo-db:27017/educational_db
+      NEWSAPI_KEY: ""
+      GROQ_API_KEY: ""
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      mongo-db:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/api/news/status || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  frontend:
+    build:
+      context: ../../frontend-tfg
+      dockerfile: Dockerfile
+    container_name: frontend_tfg
+    restart: no
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  # Web-based DB management (MySQL via Adminer at http://localhost:8081)
+  adminer:
+    image: adminer
+    restart: no
+    ports:
+      - "8082:8080"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
+  mongo_data:
